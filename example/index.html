@@ -87,29 +87,7 @@
 
   <p id="tooManySelectors">This text only displays in IE and will have an orange background if there are too many selectors</p>
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>
+  <script src="../selector-detector-bookmarklet-script.js"></script>
 
-    var stylesheets = $('link[rel="stylesheet"]');
-
-    stylesheets.each( function(i) {
-      console.log(i+1 + ' ' + this.href);
-    });
-
-    $('head').contents().filter(
-      function(){ console.log(return this.nodeType == 8;}
-    ).each(
-      function(i, el) {
-        console.log($(el));
-      }
-    );
-
-  // regexComment = new RegExp(/<!--[if/i);
-  // targetElement = regexComment.exec($('head').html());
-  // if(targetElement.length > 0) {
-  //     return parseInt(targetElement[1]);
-  // }
-
-  </script>
 </body>
 </html>
