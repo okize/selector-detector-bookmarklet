@@ -75,8 +75,6 @@
     stylesheetLink = stylesheet.href,
     stylesheetRules = stylesheet.cssRules;
 
-    console.log(stylesheet);
-
     if (stylesheetRules !== null ) {
 
       // linked stylesheet
