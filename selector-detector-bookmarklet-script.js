@@ -39,6 +39,8 @@ window['selector-detector'].init = function() {
   var getStylesheetObject = function (name, rules) {
 
     if (rules === null) {
+      console.log('rules:');
+      console.log(rules);
       rules = [];
     }
 
