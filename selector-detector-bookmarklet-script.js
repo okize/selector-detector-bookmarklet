@@ -20,11 +20,15 @@ window['selector-detector'].init = function() {
 
     var count = 0, selectors;
 
-    for (var i = 0; i < ruleset.length; i++) {
-      selectors = ruleset[i].selectorText;
-      if (selectors) {
-        count += selectors.split(',').length;
+    if (ruleset !== null) {
+
+      for (var i = 0; i < ruleset.length; i++) {
+        selectors = ruleset[i].selectorText;
+        if (selectors) {
+          count += selectors.split(',').length;
+        }
       }
+
     }
 
     return count;
