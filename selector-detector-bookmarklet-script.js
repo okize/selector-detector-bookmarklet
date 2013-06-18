@@ -1,4 +1,5 @@
-(function() {
+window['selector-detector'].version = 1;
+window['selector-detector'].init = function() {
 
   var
     stylesheets = document.styleSheets,
@@ -12,71 +13,80 @@
     },
     stylesheet,
     stylesheetLink,
-    stylesheetName,
-    stylesheetRules,
-    ssObj;
+    stylesheetRules;
 
   // returns count of selectors in ruleset
-  var getSelectorCount = function(selectors) {
+  var getSelectorCount = function (ruleset) {
 
-    if (selectors) {
-      return selectors.split(',').length;
+    var count = 0, selectors;
+
+    for (var i = 0; i < ruleset.length; i++) {
+      selectors = ruleset[i].selectorText;
+      if (selectors) {
+        count += selectors.split(',').length;
+      }
     }
 
-    return 0;
+    return count;
+
+  };
+
+  // returns an object of parsed stylesheet info
+  var getStylesheetObject = function (name, rules) {
+
+    return {
+      name: name,
+      rules: rules.length,
+      selectors: getSelectorCount(rules)
+    };
+
+  };
+
+  // outputs nice formatting to the console
+  var prettyPrint = function (count) {
+
+    console.clear();
+
+    var str = '';
+
+    str +=
+      'Found ' + count.stylesheets.total + ' total stylesheets:\n' +
+      ' - ' + count.stylesheets.linked + ' linked stylesheets\n' +
+      ' - ' + count.stylesheets.inline + ' inline style blocks\n\n' +
+      '-----------------------------------------------------------' +
+      '\n\n';
+
+    for (var i = 0, len = count.parsed.length; i < len; i++) {
+      str +=
+        count.parsed[i].name + '\n' +
+        ' - ' + count.parsed[i].rules + ' rules\n' +
+        ' - ' + count.parsed[i].selectors + ' selectors\n\n';
+    }
+
+    console.log(str);
 
   };
 
   for (var i = 0; i < count.stylesheets.total; i++) {
 
-    ssObj = {
-      name: '',
-      rules: 0,
-      selectors: 0
-    };
-
     stylesheet = stylesheets[i],
-    stylesheetLink = stylesheet.href;
+    stylesheetLink = stylesheet.href,
+    stylesheetRules = stylesheet.cssRules;
 
-    // is linked stylesheets
+    // linked stylesheet
     if (stylesheetLink !== null ) {
-
       count.stylesheets.linked++;
-
-      stylesheetRules = stylesheet.cssRules;
-
-      ssObj.name = stylesheetLink.split('/').pop();
-      ssObj.rules = stylesheetRules.length;
-
-      for (var j = 0; j < ssObj.rules; j++) {
-        ssObj.selectors += getSelectorCount(stylesheetRules[j].selectorText);
-      }
-
-      count.parsed.push(ssObj);
-
+      count.parsed.push( getStylesheetObject(stylesheetLink.split('/').pop(), stylesheetRules ));
     }
 
-    // is inline style block
+    // inline style block
     else {
-
       count.stylesheets.inline++;
-
-      stylesheetRules = stylesheet.cssRules;
-
-      ssObj.name = 'inline-style-block-' + count.stylesheets.inline;
-      ssObj.rules = stylesheetRules.length;
-
-      for (var k = 0; k < ssObj.rules; k++) {
-        ssObj.selectors += getSelectorCount(stylesheetRules[k].selectorText);
-      }
-
-      count.parsed.push(ssObj);
-
+      count.parsed.push( getStylesheetObject('inline-style-block-' + count.stylesheets.inline, stylesheetRules ));
     }
 
   }
 
-  console.dir(count);
-  // console.log( '[' + stylesheetNameParsed + '] has ' + totalRulesInStylesheet + ' rules and ' + totalSelectorsInStylesheet + ' selectors.');
+  prettyPrint(count);
 
-}).call(this);
+};
