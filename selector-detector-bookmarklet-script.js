@@ -38,6 +38,10 @@ window['selector-detector'].init = function() {
   // returns an object of parsed stylesheet info
   var getStylesheetObject = function (name, rules) {
 
+    if (rules === null) {
+      rules = [];
+    }
+
     return {
       name: name,
       rules: rules.length,
