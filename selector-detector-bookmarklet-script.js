@@ -1,4 +1,7 @@
-window['selector-detector'].version = 1;
+if (typeof window['selector-detector'] === 'undefined') {
+  window['selector-detector'] = {};
+}
+window['selector-detector'].version = 2;
 window['selector-detector'].init = function() {
 
   var
@@ -90,3 +93,5 @@ window['selector-detector'].init = function() {
   prettyPrint(count);
 
 };
+
+window['selector-detector'].init();

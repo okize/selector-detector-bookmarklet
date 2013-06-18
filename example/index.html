@@ -13,6 +13,7 @@
   <link rel="stylesheet" id="tooManyRulesStylesheet" href="expect-3-rules-4100-selectors-ie-only.css" />
   <link rel="stylesheet" id="tooManySelectorsStylesheet" href="expect-5003-rules-2-selectors-ie-only.css" />
   <![endif]-->
+  <style></style>
   <style>
     .class1 {
       margin: 0;
@@ -38,16 +39,15 @@
 </head>
 <body>
 
-  <h1>Open console to see results.</h1>
-
-  <p>This page has:</p>
+  <h1>This page has:</h1>
 
   <ul>
     <li>
 
-      <strong>Two inline &lt;style&gt; blocks:</strong>
+      <strong>Three inline &lt;style&gt; blocks:</strong>
 
       <ol>
+        <li>0 rules &amp; 0 selectors</li>
         <li>5 rules &amp; 15 selectors</li>
         <li>1 rule &amp; 5 selectors</li>
       </ol>
@@ -86,8 +86,8 @@
   <p id="tooManyRules">This text only displays in IE and will have a purple background if there are too many rules</p>
 
   <p id="tooManySelectors">This text only displays in IE and will have an orange background if there are too many selectors</p>
-<!--
+
   <script src="../selector-detector-bookmarklet-script.js"></script>
- -->
+
 </body>
 </html>

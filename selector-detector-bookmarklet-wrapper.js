@@ -8,7 +8,7 @@ javascript:(function(){
   }
   window[ namespace ] = {};
 
-  var version = 1,
+  var version = 2,
       script  = document.createElement( 'script' );
 
   script.setAttribute( 'type', 'text/javascript' );
