@@ -1,12 +1,12 @@
 javascript:(function(){
 
-  var MyNamespace = 'selector-detector',
-      scriptUrl = 'https://github.com/okize/selector-detector-bookmarklet/build/selector-detector-bookmarklet.min.js';
+  var namespace = 'selector-detector',
+      scriptUrl = 'https://raw.github.com/okize/selector-detector-bookmarklet/master/build/selector-detector-bookmarklet.min.js';
 
-  if ( window[ MyNamespace ] ) {
+  if ( window[ namespace ] ) {
     return;
   }
-  window[ MyNamespace ] = {};
+  window[ namespace ] = {};
 
   var version = 1,
       script  = document.createElement( 'script' );
@@ -22,10 +22,10 @@ javascript:(function(){
       script.onload = script.onreadystatechange = null;
 
       // initialise or warn if older version
-      if ( version !== window[ MyNamespace ].version ) {
+      if ( version !== window[ namespace ].version ) {
         alert( 'This bookmarklet is out of date!' );
       } else {
-        window[ MyNamespace ].init();
+        window[ namespace ].init();
       }
     }
   };
