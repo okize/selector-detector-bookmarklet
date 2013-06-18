@@ -7,6 +7,7 @@ var path = require('path'),
     builddir = './build',
     minfile = filename + '.min.js',
     mapfile = minfile + '.map',
+    sourcemap = '\n//# sourceMappingURL=' + mapfile,
     template = 'index-tmpl.html',
     outfile = 'index.html',
     minified,
@@ -43,7 +44,7 @@ task('minify', [], function () {
     outSourceMap: mapfile
   });
 
-  fs.writeFile(path.join(builddir, minfile), minified.code, function (err) {
+  fs.writeFile(path.join(builddir, minfile), minified.code + sourcemap, function (err) {
 
     if (err) { return error(err); }
     console.log('javascript minified');
