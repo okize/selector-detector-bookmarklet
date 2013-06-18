@@ -1,5 +1,4 @@
-window['selector-detector'].version = 2;
-window['selector-detector'].init = function() {
+(function(window, document) {
 
   var
     stylesheets = document.styleSheets,
@@ -36,16 +35,11 @@ window['selector-detector'].init = function() {
   };
 
   // returns an object of parsed stylesheet info
-  var getStylesheetObject = function (name, rules) {
-
-    if (rules === null) {
-      console.log('rules:');
-      console.log(rules);
-      rules = [];
-    }
+  var getStylesheetObject = function (href, rules) {
 
     return {
-      name: name,
+      href: href,
+      name: href.split('/').pop(),
       rules: rules.length,
       selectors: getSelectorCount(rules)
     };
@@ -54,8 +48,6 @@ window['selector-detector'].init = function() {
 
   // outputs nice formatting to the console
   var prettyPrint = function (count) {
-
-    console.clear();
 
     var str = '';
 
@@ -68,7 +60,7 @@ window['selector-detector'].init = function() {
 
     for (var i = 0, len = count.parsed.length; i < len; i++) {
       str +=
-        count.parsed[i].name + '\n' +
+        count.parsed[i].href + '\n' +
         ' - ' + count.parsed[i].rules + ' rules\n' +
         ' - ' + count.parsed[i].selectors + ' selectors\n\n';
     }
@@ -83,20 +75,31 @@ window['selector-detector'].init = function() {
     stylesheetLink = stylesheet.href,
     stylesheetRules = stylesheet.cssRules;
 
-    // linked stylesheet
-    if (stylesheetLink !== null ) {
-      count.stylesheets.linked++;
-      count.parsed.push( getStylesheetObject(stylesheetLink.split('/').pop(), stylesheetRules ));
-    }
+    console.log(stylesheet);
 
-    // inline style block
-    else {
-      count.stylesheets.inline++;
-      count.parsed.push( getStylesheetObject('inline-style-block-' + count.stylesheets.inline, stylesheetRules ));
+    if (stylesheetRules !== null ) {
+
+      // linked stylesheet
+      if (stylesheetLink !== null ) {
+        count.stylesheets.linked++;
+        count.parsed.push( getStylesheetObject(stylesheetLink, stylesheetRules ));
+      }
+
+      // inline style block
+      else {
+        count.stylesheets.inline++;
+        count.parsed.push( getStylesheetObject('inline-style-block-' + count.stylesheets.inline, stylesheetRules ));
+      }
+
+    } else {
+
+      // cross-domain
+      console.log('Stylesheets on cross domains can not be parsed:\n' + stylesheet.href);
+
     }
 
   }
 
   prettyPrint(count);
 
-};
+}).call(this, window, document, undefined);

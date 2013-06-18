@@ -1,13 +1,7 @@
 var path = require('path'),
     fs = require('fs'),
     uglify = require('uglify-js'),
-    filename = 'selector-detector-bookmarklet',
-    jsBookmarklet = filename + '-wrapper.js',
-    jsScript = filename + '-script.js',
-    builddir = './build',
-    minfile = filename + '.min.js',
-    mapfile = minfile + '.map',
-    sourcemap = '\n//# sourceMappingURL=' + mapfile,
+    script = 'selector-detector-bookmarklet.js',
     template = 'index-tmpl.html',
     outfile = 'index.html',
     minified,
@@ -23,7 +17,7 @@ task('default', [], function () {
   fs.readFile(template, 'utf8', function (err, data) {
 
     if (err) { return error(err); }
-    minified = uglify.minify(jsBookmarklet);
+    minified = uglify.minify(script);
     result = data.replace('{{replaceMe}}', encodeURI(minified.code).toString());
 
     fs.writeFile(outfile, result, function (err) {
@@ -32,29 +26,6 @@ task('default', [], function () {
       console.log('javascript saved to index.html');
 
     });
-
-  });
-
-}, true);
-
-desc('Minify script');
-task('minify', [], function () {
-
-  minified = uglify.minify(jsScript, {
-    outSourceMap: mapfile
-  });
-
-  fs.writeFile(path.join(builddir, minfile), minified.code + sourcemap, function (err) {
-
-    if (err) { return error(err); }
-    console.log('javascript minified');
-
-  });
-
-  fs.writeFile(path.join(builddir, mapfile), minified.map, function (err) {
-
-    if (err) { return error(err); }
-    console.log('javascript source map created');
 
   });
 
