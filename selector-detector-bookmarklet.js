@@ -53,16 +53,16 @@
 
     str +=
       'Found ' + count.stylesheets.total + ' total stylesheets:\n' +
-      ' - ' + count.stylesheets.linked + ' linked stylesheets\n' +
-      ' - ' + count.stylesheets.inline + ' inline style blocks\n\n' +
+      '\t' + count.stylesheets.linked + ' linked stylesheets\n' +
+      '\t' + count.stylesheets.inline + ' inline style blocks\n\n' +
       '-----------------------------------------------------------' +
       '\n\n';
 
     for (var i = 0, len = count.parsed.length; i < len; i++) {
       str +=
         count.parsed[i].href + '\n' +
-        ' - ' + count.parsed[i].rules + ' rules\n' +
-        ' - ' + count.parsed[i].selectors + ' selectors\n\n';
+        '\t' + count.parsed[i].rules + ' rules\n' +
+        '\t' + count.parsed[i].selectors + ' selectors\n\n';
     }
 
     console.log(str);

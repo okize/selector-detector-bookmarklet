@@ -23,7 +23,7 @@ task('default', [], function () {
     fs.writeFile(outfile, result, function (err) {
 
       if (err) { return error(err); }
-      console.log('javascript saved to index.html');
+      console.log('bookmarklet created in index.html');
 
     });
 
