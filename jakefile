@@ -1,9 +1,10 @@
-var path = require('path'),
-    fs = require('fs'),
+var request = require('request'),
     uglify = require('uglify-js'),
-    script = 'selector-detector-bookmarklet.js', // should request this from github
+    path = require('path'),
+    fs = require('fs'),
     template = 'index-tmpl.html',
     outfile = 'index-new.html',
+    script = 'https://raw.github.com/okize/selector-detector-bookmarklet/master/selector-detector-bookmarklet.js',
     minified,
     result;
 
@@ -14,18 +15,30 @@ var error = function (err) {
 desc('Create bookmarklet');
 task('default', [], function () {
 
-  fs.readFile(template, 'utf8', function (err, data) {
+  request(script, function (err, response, body) {
 
     if (err) { return error(err); }
-    minified = uglify.minify(script);
-    result = data.replace('{{replaceMe}}', encodeURI(minified.code).toString());
 
-    fs.writeFile(outfile, result, function (err) {
+    if (response.statusCode === 200) {
 
-      if (err) { return error(err); }
-      console.log('bookmarklet created in index.html');
+      fs.readFile(template, 'utf8', function (err, data) {
 
-    });
+        if (err) { return error(err); }
+
+        minified = uglify.minify(body, { fromString: true });
+
+        result = data.replace('{{replaceMe}}', encodeURI(minified.code).toString());
+
+        fs.writeFile(outfile, result, function (err) {
+
+          if (err) { return error(err); }
+          console.log('bookmarklet created in index.html');
+
+        });
+
+      });
+
+    }
 
   });
 
