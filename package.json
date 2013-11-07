@@ -1,6 +1,7 @@
 {
   "name": "selector-detector-bookmarklet",
-  "version": "1.0.2",
+  "version": "1.0.3",
+  "private": true,
   "description": "Bookmarklet that counts the CSS rules & selectors on a web page.",
   "main": "selector-detector-bookmarklet.js",
   "dependencies": {
