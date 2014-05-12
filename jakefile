@@ -3,7 +3,7 @@ var request = require('request'),
     path = require('path'),
     fs = require('fs'),
     template = 'index-tmpl.html',
-    outfile = 'index-new.html',
+    outfile = 'index.html',
     script = 'https://raw.github.com/okize/selector-detector-bookmarklet/master/selector-detector-bookmarklet.js',
     minified,
     result;
