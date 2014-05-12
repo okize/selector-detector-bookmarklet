@@ -4,31 +4,31 @@
   <meta charset="UTF-8">
   <title>Selector Detector Bookmarklet</title>
   <style type="text/css">
-  body {
-    margin: 1em;
-    font-family: Verdana, sans-serif;
-  }
-  .bookmarklet {
-    padding: 10px;
-    background-color: maroon;
-    color: white;
-    display: inline-block;
-    margin: 10px;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-family: verdana, serif;
-  }
+    body {
+      margin: 1em;
+      font-family: Verdana, sans-serif;
+    }
+    .bookmarklet {
+      padding: 10px;
+      background-color: DodgerBlue;
+      color: white;
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-family: verdana, serif;
+    }
   </style>
 </head>
 <body>
 
   <h1>selector-detector-bookmarklet</h1>
-  <h4>A bookmarklet that console.logs a count of rules & selectors on the page.</h4>
+  <h4>A bookmarklet that console.logs a count of rules &amp; selectors on the page.</h4>
 
   <p>Drag the button below into your browser bookmark toolbar</p>
 
   <p>
-    <a class="bookmarklet" href="javascript:(function(e,s)%7Bfor(var%20l,n,t,o=s.styleSheets,r=%7Bstylesheets:%7Btotal:o.length,inline:0,linked:0%7D,parsed:%5B%5D%7D,i=function(e)%7Bvar%20s,l=0;if(null!==e)for(var%20n=0;n%3Ce.length;n++)s=e%5Bn%5D.selectorText,s&&(l+=s.split(%22,%22).length);return%20l%7D,h=function(e,s)%7Breturn%7Bhref:e,name:e.split(%22/%22).pop(),rules:s.length,selectors:i(s)%7D%7D,a=function(e)%7Bvar%20s=%22%22;s+=%22Found%20%22+e.stylesheets.total+%22%20total%20stylesheets:%5Cn%22+%22%09%22+e.stylesheets.linked+%22%20linked%20stylesheets%5Cn%22+%22%09%22+e.stylesheets.inline+%22%20inline%20style%20blocks%5Cn%5Cn%22+%22-----------------------------------------------------------%22+%22%5Cn%5Cn%22;for(var%20l=0,n=e.parsed.length;n%3El;l++)s+=e.parsed%5Bl%5D.href+%22%5Cn%22+%22%09%22+e.parsed%5Bl%5D.rules+%22%20rules%5Cn%22+%22%09%22+e.parsed%5Bl%5D.selectors+%22%20selectors%5Cn%5Cn%22;console.log(s)%7D,c=0;c%3Cr.stylesheets.total;c++)l=o%5Bc%5D,n=l.href,t=l.cssRules,null!==t?null!==n?(r.stylesheets.linked++,r.parsed.push(h(n,t))):(r.stylesheets.inline++,r.parsed.push(h(%22inline-style-block-%22+r.stylesheets.inline,t))):console.log(%22Stylesheets%20on%20cross%20domains%20can%20not%20be%20parsed:%5Cn%22+l.href);a(r)%7D).call(this,window,document,void%200);">Selector Detector</a>
+    <a class="bookmarklet" href="javascript:(function(e,s)%7Bfor(var%20l,t,n,i=s.styleSheets,o=%7Bstylesheets:%7Btotal:i.length,inline:0,linked:0%7D,parsed:%5B%5D%7D,r=function(e)%7Bvar%20s,l,t,n=0;if(null!==e)for(var%20i=0;i%3Ce.length;i++)if(t=e%5Bi%5D,1===t.type)s=t.selectorText,s&&(n+=s.split(%22,%22).length);else%20if(4===t.type)for(var%20o=0;o%3Ct.cssRules.length;o++)l=t.cssRules%5Bo%5D.selectorText,l&&(n+=l.split(%22,%22).length);return%20n%7D,h=function(e,s)%7Breturn%7Bhref:e,name:e.split(%22/%22).pop(),rules:s.length,selectors:r(s)%7D%7D,a=function(e)%7Bvar%20s=%22%22;s+=%22Found%20%22+e.stylesheets.total+%22%20total%20stylesheets:%5Cn%09%22+e.stylesheets.linked+%22%20linked%20stylesheets%5Cn%09%22+e.stylesheets.inline+%22%20inline%20style%20blocks%5Cn%5Cn-----------------------------------------------------------%5Cn%5Cn%22;for(var%20l=0,t=e.parsed.length;t%3El;l++)s+=e.parsed%5Bl%5D.href+%22%5Cn%09%22+e.parsed%5Bl%5D.rules+%22%20rules%5Cn%09%22+e.parsed%5Bl%5D.selectors+%22%20selectors%5Cn%5Cn%22;console.log(s)%7D,c=0;c%3Co.stylesheets.total;c++)l=i%5Bc%5D,t=l.href,n=l.cssRules,null!==n?null!==t?(o.stylesheets.linked++,o.parsed.push(h(t,n))):(o.stylesheets.inline++,o.parsed.push(h(%22inline-style-block-%22+o.stylesheets.inline,n))):0!==t.indexOf(location.origin)&&(o.stylesheets.linked++,console.log(%22Stylesheet%20could%20not%20be%20parsed%20because%20it%20is%20on%20a%20different%20domain:%5Cn%22+l.href+%22%5Cn%22));a(o)%7D).call(this,window,document,void%200);">Selector Detector</a>
   </p>
 
 </body>
